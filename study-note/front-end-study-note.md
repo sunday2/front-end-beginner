@@ -155,8 +155,76 @@ https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript
 ```
 
 ```
-我们看到网站页面有动态效果，其实这就是js的功劳，它可以通过接口来动态改变HTML和CSS达到动态的目的。它是用户端(User-Agent,一般指的就是浏览器)。所以动态的指的是HTML或者CSS变了。
+    我们看到网站页面有动态效果，其实这就是JavaScript的功劳，它可以通过动态改变HTML和CSS达到动态的目的。它是用户端(User-Agent,一般指的就是浏览器)脚本语言。所谓动态的指的是HTML或者CSS变了。JavaScript是解释型语言。
 ```
 
+```
+    既然是用户端脚本语言，肯定有它的运行环境，浏览器的实现确实内嵌了JavaScript引擎，用来执行js。而为了使js能够脱离浏览器执行，就有了node.js(基于chrome的第八代js引擎开发)，有了它，js能够脱离浏览器，基于node.js而运行。所以主流的前端框架，如果想在本地运行，都是要配置js的运行环境node.js。也因为有了node.js，js甚至可以运用在后端，作为后端脚本语言(js既然作为客户端语言也能作为后端语言)。
+```
 
+```
+JavaScript为什么能够实现交互？
+https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+
+JavaScript能够实现交互或者说动态的原因在于API。API又分为了两大种。
+1.浏览器API：
+内建于浏览器中(所以可能a浏览器支持api，b浏览器不支持该api)，它们可以使周边计算环境的数据暴露出来。
+包括：
+(1)文档对象模型API。能通过创建，移除和修改HTML，为页面动态应用新样式等手段来操作 HTML 和 CSS。
+(2)地理位置API。获取地理信息，这就是为什么谷歌地图可以找到你的位置。
+(3)画布(Canvas)和WebGL API 创建2D 和3D图像。
+(4)影像类API。
+
+2.第三方API：
+这类API未嵌入浏览器中，一般从网上取得它们的信息。包括：
+(1)Twitter API和新浪微博API
+(2)谷歌地图API和高德地图API可以在网站嵌入定制的地图。
+(3)平时我们说的前后端交互其实也是理解为第三方接口。
+
+```
+
+```
+JavaScript在浏览器上作了什么?
+https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+
+在 HTML 和 CSS 集合组装成一个网页后，浏览器的 JavaScript 引擎将执行 JavaScript 代码。这保证了当 JavaScript 开始运行之前，网页的结构和样式已经就位。
+这样很好，因为通过 DOM API（见上文）动态修改 HTML 和 CSS 来更新 UI 正是 JavaScript 最普遍的用处所在。如果 JavaScript 在 HTML 和 CSS 就位之前加载运行，就会引发错误。
+```
+
+```
+JavaScript执行顺序？
+
+为了防止控制台出现undefined问题，我们需要注意js脚本定义的出现顺序。
+```
+
+```
+如何向页面添加JavaScript?
+https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+
+(1)内部JavaScript
+在HTML文件中的 </body> 标签结束前插入以下代码：
+<script>
+  // 在此编写 JavaScript 代码
+</script>
+
+(2)外部JavaScript(推荐)
+在HTML中<head>标签中嵌入外部的js文件。
+<script src="script.js" async></script>
+
+
+(3)内联JavaScript处理器(强烈不推荐)
+<button onclick="createParagraph()">点我呀</button>
+
+这将使 JavaScript 污染到 HTML，而且效率低下。对于每个需要应用 JavaScript 的按钮，你都得手动添加 onclick="createParagraph()" 属性。
+可以使用纯 JavaScript 结构来通过一个指令选取所有按钮。
+
+```
+
+```
+JavaScrpt脚本调用顺序策略?（非常重要）
+https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/What_is_JavaScript#%E5%86%85%E8%81%94_JavaScript_%E5%A4%84%E7%90%86%E5%99%A8
+
+(1)如果脚本无需等待页面解析，且无依赖独立运行，那么应使用 async。
+(2)如果脚本需要等待解析，且依赖于其它脚本，调用这些脚本时应使用 defer，将关联的脚本按所需顺序置于 HTML 中。
+```
 
