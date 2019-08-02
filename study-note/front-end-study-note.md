@@ -228,3 +228,82 @@ https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/What_is_Ja
 (2)如果脚本需要等待解析，且依赖于其它脚本，调用这些脚本时应使用 defer，将关联的脚本按所需顺序置于 HTML 中。
 ```
 
+* React
+```
+React官方中文教程
+https://zh-hans.reactjs.org/tutorial/tutorial.html
+```
+
+```
+目前主流三大前端框架之一，在三大框架的使用率上，2019年目前仍然是React的使用率最高(大幅领先)，Angular次之，VUE次之。
+通过npm trends网站可以知道三者下载量的一个趋势:
+https://www.npmtrends.com/angular-vs-react-vs-vue
+```
+
+```
+React的入门我觉得官方的教程挺好，直接动手实践是最快成长的方式，官方的教程也写的很好。
+```
+```
+React是一个声明式，高效且灵活的用于构建用户界面的JavaScript库。
+```
+
+```
+环境准备(本地开发):
+1.安装Node.js(JavaScript运行环境，基于chrome V8 js引擎开发)。
+由于JavaScript的运行需要对应的js引擎(浏览器本身内嵌有js引擎)，所以如果脱离浏览器在本地运行的话肯定得有JavaScript的运行环境--Node.js。这个步骤就类似java需要安装jdk一样。
+2.安装npm。npm是JavaScript语言的一个包管理工具。这个就类似java中的maven。
+```
+
+```
+React中的组件?
+使用React可以将一些简短的，独立的代码片段组合成更复杂的UI界面，这些代码片段就是组件。
+
+React原生已经提供了很多不同类型的组件，如果需要自定义组件，可以通过extends React.Component子类开始。
+```
+```
+如何定义一个组件？
+```
+
+
+```
+如何在a组件中使用b组件?
+```
+
+```
+参数如何在组件中传递?
+
+每个组件最终返回的是一个html片段，也就是element。element有属性(K-V键值对)，也就是property。组件内部通过
+this.props.property
+就可以获取对应的属性值了。
+```
+
+```
+如何引用变量?
+{variable}
+```
+
+```
+组件中构造函数的使用?
+
+组件就类似java中的类，当然，class在js中只是个语法糖。那么类或者说组件可以定义自己内部的一些状态或者说变量或者说对象。
+
+//构造函数名和参数固定写法
+constructor(props){
+	  //调用父构造函数,固定写法
+      super(props);
+      //定义组件内部自己的状态，这里state是一个json对象
+      this.state = {
+        value:null,
+      };
+}
+
+```
+
+```
+在浏览器安装React Devtools插件方便点击右键选择"查看"直接打开开发者工具。
+```
+
+```
+
+```
+
