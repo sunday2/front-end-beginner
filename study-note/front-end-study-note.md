@@ -231,6 +231,8 @@ https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/What_is_Ja
 * React
 ```
 React官方中文教程
+https://zh-hans.reactjs.org/docs/components-and-props.html
+实战教程:
 https://zh-hans.reactjs.org/tutorial/tutorial.html
 ```
 
@@ -275,6 +277,9 @@ React原生已经提供了很多不同类型的组件，如果需要自定义组
 每个组件最终返回的是一个html片段，也就是element。element有属性(K-V键值对)，也就是property。组件内部通过
 this.props.property
 就可以获取对应的属性值了。
+
+
+并且函数也可以进行传递！！！！
 ```
 
 ```
@@ -304,6 +309,181 @@ constructor(props){
 ```
 
 ```
+给element绑定监听事件函数要注意的地方?
+
+注意：此处使用了 onClick={() => alert('click')} 的方式向 onClick 这个 prop 传入一个函数。 React 将在单击时调用此函数。但很多人经常忘记编写 () =>，而写成了 onClick={alert('click')}，这种常见的错误会导致每次这个组件渲染的时候都会触发弹出框。
+```
 
 ```
+如何进行前后端交互?
+
+```
+
+```
+构造函数什么情况下使用？
+
+构造函数在需要定义组件内部的私有变量时使用。
+```
+
+```
+为什么不可变性在React中非常重要?
+
+先说说两种改变数据的方式?
+(1)直接在原有数据上直接修改。
+var player = {score: 1, name: 'Jeff'};
+player.score = 2;
+// player 修改后的值为 {score: 2, name: 'Jeff'}
+
+(2)新数据替换旧数据
+var player = {score: 1, name: 'Jeff'};
+
+var newPlayer = Object.assign({}, player, {score: 2});
+// player 的值没有改变, 但是 newPlayer 的值是 {score: 2, name: 'Jeff'}
+
+// 使用对象展开语法，就可以写成：
+// var newPlayer = {...player, score: 2};
+
+不直接修改(或改变底层数据)和直接修改的方式结果是一样的，但是拥有更多好处:
+(1)简化复杂功能。可追溯数据的变化，毕竟撤销和恢复功能在开发中是一个很常见的需求。它使得复杂的特性更容易实现
+(2)跟踪数据变化。如果发现对象变成了一个新对象，那么我们就可以说对象发生了改变。
+(3)确定在React中何时渲染(利于进行性能优化)。不可变性最主要优势在于帮助我们在React中创建pure components。我们可以很轻松的确定不可变数据是否发生了改变，从而确定何时对组件进行重新渲染。
+```
+
+```
+组件的两种定义方式?
+(1)extends React.Component。
+(2)函数组件。如果需要实现的组件只包含render方法，不需要私有的state，那么使用函数组件更简单。
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}。
+使用函数组件时候,注意事件的绑定机制写法也不一样。
+```
+
+
+```
+当 React 元素为用户自定义组件时，它会将 JSX 所接收的属性（attributes）转换为单个对象传递给组件，这个对象被称之为 “props”。
+```
+```
+props如何命名？
+
+我们建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
+```
+
+```
+props的只读性?
+
+所有 React 组件都必须像纯函数一样保护它们的 props 不被更改。
+tips:也就是组件传入的参数不允许在组件内部修改。
+```
+
+```
+每次组件更新时 render 方法都会被调用
+```
+
+```
+尽管 this.props 和 this.state 是 React 本身设置的，且都拥有特殊的含义，但是其实你可以向 class 中随意添加不参与数据流（比如计时器 ID）的额外字段。
+```
+
+```
+React组件中的一些内置的生命周期方法？
+
+(1)挂载方发。组件生命周期中的挂载方法，组件第一次渲染到DOM中的时候调用。
+  
+   componentDidMount() {
+   }
+  
+  
+  
+2）卸载方法。组件被删除的时候调用
+  componentWillUnmount() {
+
+  }
+```
+
+```
+React中即时每次都会创建新的React DOM，但是只会更新变化的element！！！！牛逼
+```
+
+```
+关于React组件中state?
+
+(1)组件的构造函数是唯一可以给this.state直接赋值的地方！！！,
+this.state.comment = 'Hello';
+在其余地方更新state只能通过setState方法,否则无法触动render方法重新渲染组件
+this.setState({comment: 'Hello'});
+
+(2)state的更新可能是异步的。
+出于性能考虑，React 可能会把多个 setState() 调用合并成一个调用。
+因为 this.props 和 this.state 可能会异步更新，所以你不要依赖他们的值来更新下一个状态。
+
+// Wrong
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+要解决这个问题，可以让 setState() 接收一个函数而不是一个对象。
+(3)state的更新会被合并(浅合并)。	
+调用 setState() 的时候，React 会把你提供的对象合并到当前的 state。
+
+```
+
+```
+React中的数据(state)是向下流动的！！！
+
+不管是父组件或是子组件都无法知道某个组件是有状态的还是无状态的。这就是为什么称 state 为局部的或是封装的的原因。除了拥有并设置了它的组件，其他组件都无法访问。
+
+组件可以选择把它的 state 作为 props 向下传递到它的子组件中：
+
+<h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+这对于自定义组件同样适用：
+
+<FormattedDate date={this.state.date} />
+FormattedDate 组件会在其 props 中接收参数 date，但是组件本身无法知道它是来自于 Clock 的 state，或是 Clock 的 props，还是手动输入的：
+
+function FormattedDate(props) {
+  return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+}
+在 CodePen 上尝试
+
+这通常会被叫做“自上而下”或是“单向”的数据流。任何的 state 总是所属于特定的组件，而且从该 state 派生的任何数据或 UI 只能影响树中“低于”它们的组件。
+
+如果你把一个以组件构成的树想象成一个 props 的数据瀑布的话，那么每一个组件的 state 就像是在任意一点上给瀑布增加额外的水源，但是它只能向下流动。
+
+为了证明每个组件都是真正独立的，我们可以创建一个渲染三个 Clock 的 App 组件：
+
+function App() {
+  return (
+    <div>
+      <Clock />
+      <Clock />
+      <Clock />
+    </div>
+  );
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+在 CodePen 上尝试
+
+每个 Clock 组件都会单独设置它自己的计时器并且更新它。
+
+在 React 应用中，组件是有状态组件还是无状态组件属于组件实现的细节，它可能会随着时间的推移而改变。你可以在有状态的组件中使用无状态的组件，反之亦然。
+
+组件可以选择把它的 state 作为 props 向下传递到它的子组件中。(所谓的向下流动)
+```
+
+```
+export statement的使用？
+
+在HTML,CSS,JS中JS是最复杂的。JS中的statement中觉得有必要重点了解下import statement，但是说到import statement得先说下export statement。
+```
+
+
+
+
 
