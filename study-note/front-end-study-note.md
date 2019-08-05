@@ -1,3 +1,5 @@
+> 
+>
 > 作为一个在后端领域摸爬打滚了几年的人来说，入门前端应该是不难的，毕竟语言的语法可能不同，但是有些思想却是一样的，要想形成一个长久的记忆，知识体系的构建是相当重要的。
 
 * HTML+CSS+JavaScript
@@ -477,10 +479,22 @@ ReactDOM.render(
 组件可以选择把它的 state 作为 props 向下传递到它的子组件中。(所谓的向下流动)
 ```
 
+* JavaScript语法
+
+```
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript
+```
 ```
 export statement的使用？
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/export
 
-在HTML,CSS,JS中JS是最复杂的。JS中的statement中觉得有必要重点了解下import statement，但是说到import statement得先说下export statement。
+在HTML,CSS,JS中JS是最复杂的。JS中的statement中觉得有必要重点了解下import statement，但是说到import statement得先说下export statement。import(类比java中的导入)和export是js模块化，工程化编程思想的体现。
+
+在创建JavaScript模块时，export 语句用于从模块中导出函数、对象或原始值，以便其他程序可以通过 import 语句使用它们。
+
+
+
+
 ```
 
 
